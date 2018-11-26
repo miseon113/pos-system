@@ -1,0 +1,93 @@
+body{
+  margin: 0px;
+  background-color:#F4F4F9;
+  font: "Lucida Sans Unicode";
+}
+button{
+  width: 250px;
+  height: 55px;
+  font-size: 25px;
+  font-weight: bold;
+  color: white;
+  background-color:#586F7C;
+  display: inline;
+  margin: 0px 100px;
+  line-height: 50px;
+  border-radius: 15px;
+  cursor: pointer;
+  border:
+}
+button:hover{
+  cursor: pointer;
+  background-color: #2F4550;
+}
+.grid-header{
+  grid-area: header;
+  text-align: center;
+  padding: 10px 0px;
+}
+.grid-main{
+  border: 7px solid #2F4550;
+  grid-area: main;
+  background-color: #F4F4F9;
+  border-radius: 1em;
+}
+.grid-menu{
+  grid-area: menu;
+}
+.grid-right{
+  grid-area: right;
+}
+.grid-footer{
+  grid-area: footer;
+}
+.grid-container{
+  display: grid;
+  grid-template-areas: 'header header header'
+                        'menu main right'
+                        'footer footer footer';
+  grid-gap: 10px;
+  background-color: #F4F4F9;
+  grid-template-columns: 1fr 7fr 1fr;
+  grid-template-rows: 2fr 7fr 1fr;
+}
+
+
+/* 모달 */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* 모달 안 내용 */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* 모달 닫힘 버튼 */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}

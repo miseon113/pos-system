@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Main</title>
+    <link rel="stylesheet" href="Main.css">
+    <script type="text/javascript" src="Main.js"></script>
+  </head>
+  <body>
+    <div class="grid-container">
+      <div class="grid-header">
+
+        <!--카테고리 등록 버튼-->
+        <button id="Regist_Btn" type="button" name="Regist_Btn">등록</button>
+
+            <div id="Regist_Modal" class="modal">
+              <!-- Modal content -->
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <form>
+                  카테고리명   : <input type="text" name="Category_name"><br>
+                  카테고리사진 : <input type="image" name="Category_img">&nbsp;
+                  <input type="file" name="select_Cate_img">
+                  <br><br>
+                  <input type="submit" name="Regist_Category" value="등록">
+                </form>
+              </div>
+            </div>
+
+          <!--카테고리 수정 버튼-->
+          <button id="Edit_Btn" type="button" name="Edit_Btn">수정</button>
+                <div id="Edit_Modal" class="modal">
+                  <!-- Modal content -->
+                  <div class="modal-content">
+                    <h1>카테고리 수정</h1>
+                    <span class="close">&times;</span>
+                    <form>
+                      카테고리 :<select name="Category_list">
+                                  <option value="1" selected>카테고리명1</option>
+                                  <option value="2">카테고리명2</option>
+                                  <option value="3">카테고리명3</option>
+                                  <opttion value="4">카테고리명4</option>
+                              </select><br>
+                      카테고리명: <br>
+                      카테고리사진 : <input type="image" name="Category_img">&nbsp;
+                      <input type="file" name="select_Cate_img">
+                      <br><br>
+                      <input type="submit" name="Edit_Category" value="수정">
+                    </form>
+                  </div>
+          </div>
+
+
+          <!--카테고리 삭제 버튼-->
+          <button id="Delete_Btn" type="button" name="Delete_Btn">삭제</button>
+            <div id="Delete_Modal" class="modal">
+              <!-- Modal content -->
+              <div class="modal-content">
+                <h1>카테고리 삭제</h1>
+                <span class="close">&times;</span>
+                <form>
+                  카테고리 :<select name="Category_list">
+                              <option value="1" selected>카테고리명1</option>
+                              <option value="2">카테고리명2</option>
+                              <option value="3">카테고리명3</option>
+                              <opttion value="4">카테고리명4</option>
+                            </select><br><br>
+                  <input type="submit" name="Edit_Category" value="삭제">
+              </form>
+            </div>
+    </div>
+
+</div>
+      <div class="grid-menu">
+      </div>
+      <div class="grid-main">
+        <!-- <span class="blink" > 조회하고자 하는 메뉴의 카테고리를 선택해주세요.</span>
+          <table>  메뉴 목록 db에서 불러오는 건데 여기에 써야 하나 ?-->
+            <!-- <tr>
+              <td>카테고리명1, 카테고리사진 들어갈 자리</td>
+              <td>카테고리명2, 카테고리사진 들어갈 자리</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>카테고리명3, 사진 자리</td>
+              <td>카테고리명4, 사진 자리</td>
+            </tr>
+          </table>  -->
+        </div>
+        <div class="grid-right">
+
+        </div>
+        <div class="grid-footer">
+
+        </div>
+
+
+    </div>
+  </body>
+</html>
