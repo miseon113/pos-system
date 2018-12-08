@@ -1,0 +1,135 @@
+.Category_bar{
+border:none;
+border:0px;
+margin:0px;
+padding:0px;
+font: 67.5% "Lucida Sans Unicode";
+font-size:14px;
+font-weight:bold;
+}
+
+.Category_bar ul{
+background: #586F7C;
+height:50px;
+list-style:none;
+margin:0;
+padding:0;
+}
+
+.Category_bar li{
+float:left;
+padding:0px;
+}
+
+.Category_bar li a{
+background: #586F7C;
+color:white;
+display:block;
+font-weight:normal;
+line-height:50px;
+margin:0px;
+padding:0px 25px;
+text-align:center;
+text-decoration:none;
+}
+
+.Category_bar li a:hover, .menubar ul li:hover a{
+background: #2F4550;
+color:white;
+text-decoration:none;
+}
+
+.in_Modal_menuBtn{
+  column-span: 2;
+  font-weight: bold;
+  color: white;
+  background-color:#586F7C;
+  border-radius: 15px;
+  cursor: pointer;
+  margin: 20px auto;
+  width: 250px;
+
+}
+.in_Modal_menuBtn:hover{
+  cursor: pointer;
+  background-color: #2F4550;
+}
+textarea{
+  resize: none;
+}
+
+.in_menuModal_table{
+  position: relative;
+  left: 350px;
+}
+
+
+/* 카테고리에 해당하는 메뉴 보여주는 화면에서 그리드 메인 내부*/
+.Category_bar{
+  grid-area: cateBar;
+}
+.grid-menuList{
+  grid-area: menuList;
+}
+/* Basket 내부 */
+.BasketMenuList{
+  grid-area: BasketMenuList;
+  width: 900px;
+  height: 210px;
+}
+.BasketTotalPrice{
+  grid-area: BasketTotalPrice;
+  width: 250px;
+  height: 140px;
+  position: relative;
+  top: 0px;
+}
+.BasketPay{
+  grid-area: BasketPay;
+  width:250px;
+  height:70px;
+  position: relative;
+  top:-50px;
+}
+
+/*               */
+.grid-Basket{
+  grid-area: basket;
+}
+
+.grid-two {
+  grid-template-columns: auto auto;
+}
+
+.grid-main{
+  display: grid;
+  grid-template-areas: 'cateBar'
+                       'menuList'
+                       'basket';
+  grid-template-rows: 50px auto 250px ;
+}
+
+
+
+
+#basketpay_btn{
+  width: 250px;
+  height:70px;
+  display: grid;
+  margin: 0px;
+}
+h3{
+  margin: 0px;
+}
+h2{
+  margin: 0px;
+}
+.inBasket_rightPart{
+  display: inline-block;
+  grid-template-areas: 'BasketTotalPrice'
+                       'BasketPay';
+  text-align: center;
+  width: 350px;
+  max-height: 160px;
+  padding-left: 120px;
+}

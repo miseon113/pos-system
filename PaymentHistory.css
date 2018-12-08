@@ -1,0 +1,112 @@
+body{
+  font-weight: bold;
+}
+.CancleWord{
+    font-size: 60px;
+    margin: 50px 20px;
+    border: none;
+}
+.ApprovalID{
+  font-size: 30px;
+  font-weight: bold;
+  margin: 10px 30px;
+}
+.orderNum{
+  font-size: 25px;
+  font-weight: bold;
+  position: absolute;
+  right: 300px;
+  top: 100px;
+}
+
+.grid-container{
+  border: 15px solid #2F4550;
+  border-radius: 10px;
+  margin: 20px;
+  margin-bottom: 5px;
+  height: 650px;
+
+}
+.grid-main{
+  margin: 70px 70px 10px 70px;
+}
+input{
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 3px solid #2F4550;
+  width: 300px;
+  text-align: center;
+  height: 25px;
+  font-size: 20px;
+}
+button{
+  position: relative;
+  left: 20px;
+  bottom: 5px;
+  font-size: 15px;
+  font-weight: bold;
+  color: white;
+  background-color:#586F7C;
+  line-height: 50px;
+  width: 150px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+button:hover{
+  cursor: pointer;
+  background-color: #2F4550;
+}
+caption{
+  font-weight: bold;
+  font-size: 25px;
+  padding: 10px;
+  text-align: left;
+}
+table{
+  padding: 10px;
+  border-collapse: collapse;
+  margin-left: 30px;
+  border-radius: 10px;
+}
+table,tr,th,td{
+  border: 1px solid #2F4550;
+  width: 900px;
+}
+tr,td{
+  padding: 20px 40px;
+}
+th{
+  font-size: 20px;
+  padding: 10px 40px;
+  background-color: #2F4550;
+  color: white;
+}
+td{
+  font-size: 15px;
+  text-align: center;
+}
+.MenuList{
+  width: 930px;
+  overflow-x:hidden;
+  overflow-y:scroll;
+  max-height: 250px;
+}
+.MenuList table,.MenuList tr{
+  width: 900px;
+  max-height: 250px;
+}
+.CancleModalBtn{
+  position: relative;
+  top: 20px;
+  left: 1100px;
+  width: 200px;
+}
+i{
+  font-size: 30px;
+  padding-left: 30px;
+  cursor: pointer;
+}
+i:hover{
+  cursor: pointer;
+}

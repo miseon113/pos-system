@@ -1,0 +1,124 @@
+.Basket,.Basket th,.Basket td{border:0;}
+/**.frt_tbl_type a{color:#383838;text-decoration:none}*/
+.Basket{
+  width:100%;
+  border-top:2px solid #2F4550;
+  border-bottom:1px solid #999;
+  color:white;
+  font-size:12px;
+  table-layout:fixed;
+  margin:0 0 0 0;
+}
+.Basket caption,.Basket .forCheck label, th label {
+  display:none
+}
+.Basket th{
+  margin:0 0 0 0;
+  padding:5px 0 5px 0;
+  border-bottom:solid 1px #2F4550;
+  background-color:#586F7C;
+  color:white;
+  font-weight:bold;
+  line-height:14px;
+  vertical-align:middle;
+  height:25px;
+  text-align:center;
+}
+.Basket td{
+  padding:8px 0 5px;
+  border-bottom:solid 1px #586F7C;
+  text-align:center;
+  color:#383838;
+  padding:7px 0 5px;
+}
+/* .Basket td span a{
+  color:#383838;
+}
+.Basket td span a:hover {
+  color:#383838;
+}
+.Basket td a{
+  font-size:12px;
+  color:#0084b4;
+}
+.Basket td a:hover {
+  color:#c40452;
+} */
+.Basket td div.page {
+  float:left;
+  padding:0 0 0 10px;
+}
+.Basket td div.page span {
+  border-left:1px solid #d6d6d6;
+}
+/* .Basket td div.page span.br_none {
+  border:none;
+} */
+/* .Basket td ul.right {
+  float:right;
+  padding:0 2px 0 0;
+  _height:18px;
+} */
+/* .Basket td ul.right li a {
+  padding:0 8px 0 8px;
+  border-left:1px solid #d6d6d6;
+} */
+/* .Basket td ul.right li a img {
+  vertical-align:middle;
+  padding:0 0 0 2px;
+}
+.Basket td ul.right li a.down {
+  background:url(../images/Admin/ic_down.gif) no-repeat right center;
+  margin:0 5px 0 4px;
+
+}
+.Basket td ul.right li a.none {
+  margin:0 0 0 0;
+}
+.Basket td ul.right li a.strong {
+  font-weight:bold;
+}
+.Basket td ul.right li a.br_none {
+  border:none;
+}
+.Basket td ul.right li a.pd_none {
+  padding:0;
+} */
+.Basket td ul.right li span img {
+  margin:0;
+  padding:0;
+}
+.Basket .forCheck{
+  padding:0;
+  text-align:center;
+}
+.Basket .forCheck input{
+  margin:0;
+}
+.Basket .menu,.Basket .price,.Basket .hit{
+  padding:0;
+  font-size:11px;
+  line-height:normal;
+}
+/* .Basket .key{
+  line-height:normal;
+} */
+.Basket .amount{
+  text-align:center;
+  padding:6px 0 7px;
+}
+.Basket .amount .pic, .Basket .amount .new ,  .Basket .amount .data {
+  margin:0 0 2px;
+  vertical-align:middle;
+}
+/* .Basket tr.reply .amount a{
+  padding:3px 0 0 23px;
+  background:url(/images/usr/common2/icon/ic_reply.gif) 0px 2px no-repeat;
+} */
+/* .Basket tr.reply td a.comment{
+  padding:0;
+  background:none;
+  color:#f00;
+  font-size:12px;
+  font-weight:bold;
+} */

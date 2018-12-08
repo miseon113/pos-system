@@ -5,6 +5,10 @@
     <title>Main</title>
     <link rel="stylesheet" href="Main.css">
     <script type="text/javascript" src="Main.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="jquery.toast.min.css" />
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="jquery.toast.min.js"></script>
   </head>
   <body>
     <div class="grid-container">
@@ -12,89 +16,98 @@
 
         <!--카테고리 등록 버튼-->
         <button id="Regist_Btn" type="button" name="Regist_Btn">등록</button>
-
             <div id="Regist_Modal" class="modal">
-              <!-- Modal content -->
+              <!-- 모달 안 내용 -->
               <div class="modal-content">
                 <span class="close">&times;</span>
-                <form>
-                  카테고리명   : <input type="text" name="Category_name"><br>
-                  카테고리사진 : <input type="image" name="Category_img">&nbsp;
-                  <input type="file" name="select_Cate_img">
-                  <br><br>
-                  <input type="submit" name="Regist_Category" value="등록">
-                </form>
+                <h1>카테고리 등록</h1>
+                    <form action="category.jsp" method="POST"><!--여기 jsp 만들어줘야 함 !!!!!!!!!!!!-->
+                      <table class="in_cateModal_table">
+                        <tr>
+                          <th>카테고리명</th>
+                          <td><input class="forInputWidth" type="text" name="Category_name"></td>
+                        </tr>
+                        <tr>
+                          <th>카테고리사진</th>
+                          <td><input type="file" name="select_img"></td>
+                      </table>
+                      <button class="in_Modal_cateBtn" type="submit" name="Regist_Category">등록</button>
+                  </form>
               </div>
             </div>
 
           <!--카테고리 수정 버튼-->
           <button id="Edit_Btn" type="button" name="Edit_Btn">수정</button>
                 <div id="Edit_Modal" class="modal">
-                  <!-- Modal content -->
+                  <!-- 모달 안 내용 -->
                   <div class="modal-content">
-                    <h1>카테고리 수정</h1>
                     <span class="close">&times;</span>
-                    <form>
-                      카테고리 :<select name="Category_list">
-                                  <option value="1" selected>카테고리명1</option>
-                                  <option value="2">카테고리명2</option>
-                                  <option value="3">카테고리명3</option>
-                                  <opttion value="4">카테고리명4</option>
-                              </select><br>
-                      카테고리명: <br>
-                      카테고리사진 : <input type="image" name="Category_img">&nbsp;
-                      <input type="file" name="select_Cate_img">
-                      <br><br>
-                      <input type="submit" name="Edit_Category" value="수정">
+                    <h1>카테고리 수정</h1>
+                    <form action="category.jsp" method="POST"><!--여기 jsp 만들어줘야 함 !!!!!!!!!!!!-->
+                      <table class="in_cateModal_table">
+                        <tr>
+                          <th>카테고리목록</th>
+                          <td>
+                            <input type="text" name="Category_List" value="">
+                          </td>
+                          <td>
+                            <input type="submit" name="find_Category" value="검색">
+                          </td>
+                        </tr>
+                        <tr>
+                          <th>카테고리명</th>
+                          <td>
+                            <input type="text" name="Category_List" value="">
+                          </td>
+                        </tr>
+                        <tr>
+                          <th>카테고리사진</th>
+                          <td><input type="file" name="Category_Image"></td>
+                        </tr>
+                      </table>
+                      <button class="in_Modal_cateBtn Modal_Delete_Btn" type="submit" name="Edit_Category">수정</button>
                     </form>
                   </div>
-          </div>
+              </div>
 
 
           <!--카테고리 삭제 버튼-->
           <button id="Delete_Btn" type="button" name="Delete_Btn">삭제</button>
             <div id="Delete_Modal" class="modal">
-              <!-- Modal content -->
-              <div class="modal-content">
-                <h1>카테고리 삭제</h1>
-                <span class="close">&times;</span>
-                <form>
-                  카테고리 :<select name="Category_list">
-                              <option value="1" selected>카테고리명1</option>
-                              <option value="2">카테고리명2</option>
-                              <option value="3">카테고리명3</option>
-                              <opttion value="4">카테고리명4</option>
-                            </select><br><br>
-                  <input type="submit" name="Edit_Category" value="삭제">
-              </form>
+              <!-- 모달 안 내용 -->
+                  <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h1>카테고리 삭제</h1>
+                    <form action="category.jsp" method="POST"><!--여기 jsp 만들어줘야 함 !!!!!!!!!!!!-->
+                      <table class="in_cateModal_table Modal_Delete_table">
+                        <tr>
+                          <th>카테고리</th>
+                          <td>
+                            <input type="text" name="Category_list" value="">
+                            </td>
+                        </tr>
+                      </table>
+                      <button class="in_Modal_cateBtn" type="submit" name="Delete_Category">삭제</button>
+                    </form>
+                  </div>
             </div>
-    </div>
+      <!---관리자를 위한 버튼--->
+            <button id="Manager_Btn" type="button" name="Manager_Btn" onclick="location.href='PaymentHistory.html'">관리자</button>
 
-</div>
-      <div class="grid-menu">
       </div>
       <div class="grid-main">
-        <!-- <span class="blink" > 조회하고자 하는 메뉴의 카테고리를 선택해주세요.</span>
-          <table>  메뉴 목록 db에서 불러오는 건데 여기에 써야 하나 ?-->
-            <!-- <tr>
-              <td>카테고리명1, 카테고리사진 들어갈 자리</td>
-              <td>카테고리명2, 카테고리사진 들어갈 자리</td>
+          <table>
+           <tr>
+             <td><span class="categoryname" onclick=""><img src="라멘.png" alt=""><br><h2>카테고리명1</h2></span></td>
+              <td><span class="categoryname" onclick=""><img src="사이드메뉴.png" alt=""><br><h2>카테고리명2</h2></span></td>
               <td></td>
             </tr>
             <tr>
-              <td>카테고리명3, 사진 자리</td>
-              <td>카테고리명4, 사진 자리</td>
+              <td><span class="categoryname" onclick=""><img src="콜라.png" alt=""><br><h2>카테고리명3</h2></span></td>
+              <td><span class="categoryname" onclick=""><img src="오코노미야끼.png" alt=""><br><h2>카테고리명4</h2></span></td>
             </tr>
-          </table>  -->
+          </table>
         </div>
-        <div class="grid-right">
-
-        </div>
-        <div class="grid-footer">
-
-        </div>
-
-
     </div>
   </body>
 </html>

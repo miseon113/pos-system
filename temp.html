@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> temp </title>
+    <link rel="stylesheet" href="temp.css">
+    <script type="text/javascript" src="temp.js"></script>
+    <script type="text/javascript" src="Main.js"></script>
+    <link rel="stylesheet" href="shoppingBasket.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="jquery.toast.min.css" />
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="jquery.toast.min.js"></script> -->
+  </head>
+
+
+  <body>
+    <div class="grid-container">
+      <div class="grid-header">
+
+        <!--메뉴 등록 버튼-->
+        <button id="Regist_Btn" type="button" name="Regist_Btn">등록</button>
+
+            <div id="Regist_Modal" class="modal">
+              <!-- Modal content -->
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <h1>메뉴 현황 등록</h1>
+                  <form action="result.jsp" method="POST"><!--여기 jsp 만들어줘야 함 !!!!!!!!!!!!-->
+                    <table class="in_menuModal_table">
+                      <tr>
+                        <th>메뉴명</th>
+                        <td> <input class="forInputWidth" type="text" name="menuName"></td>
+                      </tr>
+                        <th>메뉴가격</th>
+                        <td><input class="forInputWidth" type="text" name="menuPrice"></td>
+                      <tr>
+                        <th>메뉴사진</th>
+                        <td><input type="file" name="select_img"></td>
+                      </tr>
+                      <tr>
+                        <th>메뉴설명</th>
+                        <td><textarea name="menuExplaination" rows="5" cols="50"></textarea></td>
+                      </tr>
+                  </table>
+                  <button class="in_Modal_menuBtn" type="submit" name="Regist_Menu">등록</button>
+                </form>
+              </div>
+            </div>
+
+        <!--메뉴 수정 버튼-->
+        <button id="Edit_Btn" type="button" name="Edit_Btn">수정</button>
+          <div id="Edit_Modal" class="modal">
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <h1> 메뉴 현황 수정 </h1>
+                <form action="result.jsp" method="post"><!--여기 jsp 만들어줘야 함 !!!!!!!!!!!!-->
+                  <table class="in_menuModal_table">
+                    <tr>
+                      <th>메뉴</th>
+                        <td>
+                          <select class="forInputWidth" name="Menu_list" >
+                              <option value="1" selected>메뉴명1</option>
+                              <option value="2">메뉴명2</option>
+                              <option value="3">메뉴명3</option>
+                              <option value="4">메뉴명4</option>
+                          </select>
+                        </td>
+                    </tr>
+                    <tr>
+                      <th>메뉴명</th><!--여기 위에 select에서 선택한 값이 그냥 입력되는 칸인데 어떻게 해야하지-->
+                    </tr>
+                    <tr>
+                      <th>메뉴가격</th>
+                      <td><input class="forInputWidth" type="text" name="menuPrice"></td><!--여기도 선택하면 입력되어야 하는데-->
+                    </tr>
+                    <tr>
+                      <th>메뉴사진</th>
+                      <td> <input type="file" name="menuImage"></td>
+                    </tr>
+                  <!--여기도 마찬가지-->
+                  <tr>
+                    <th>메뉴설명</th>
+                    <td><textarea name="menuDescription" rows="5" cols="50"></textarea></td>
+                  </tr>
+                  </table>
+                  <button class="in_Modal_menuBtn" type="submit" name="Edit_Menu">수정</button>
+                </form>
+          </div>
+        </div>
+
+        <!--메뉴 삭제 버튼-->
+        <button id="Delete_Btn" type="button" name="Delete_Btn">삭제</button>
+          <div id="Delete_Modal" class="modal">
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <h1> 메뉴 현황 삭제 </h1>
+                <form action="result.jsp" method="post"><!--여기 jsp 만들어줘야 함 !!!!!!!!!!!!-->
+                  <table class="in_menuModal_table Modal_Delete_table">
+                    <tr>
+                      <th>메뉴명</th>
+                      <td>
+                        <select name="Menu_list">
+                              <option value="1" selected>메뉴명1</option>
+                              <option value="2">메뉴명2</option>
+                              <option value="3">메뉴명3</option>
+                              <option value="4">메뉴명4</option>
+                        </select>
+                      </td>
+                    </tr>
+                  </table>
+                  <button class="in_Modal_menuBtn" type="submit" name="Delete_Menu">삭제</button>
+                </form>
+          </div>
+        </div>
+
+      </div>
+
+
+      <!--화면에서 왼쯕 부분-->
+      <div class="grid-menu">
+      </div>
+
+      <!-- 화면에서 가운데 메인-->
+      <div class="grid-main">
+            <div class="Category_bar">
+              <ul>
+                <li><a href="#">카테고리1</a></li>
+                <li><a href="#" id="current">카테고리2</a></li>
+                <li><a href="#">카테고리3</a></li>
+                <li><a href="#">카테고리4</a></li>
+                <li><a href="#">카테고리5</a></li>
+              </ul>
+            </div>
+
+
+          <!-- 선택한 카테고리에 해당하는 메뉴들 보여지는곳 db 연동-->
+          <div class="grid-menuList">
+          <div id="table-menuList-scroll">
+            <table id="table-menuList" class="abc">
+              <colgroup>
+          			<col width="100px" />
+          			<col width="300px" />
+                <col width="auto" />
+              </colgroup>
+              <tr class="menu1" onclick="chooseMenu(1)">
+                <td id="menu1_img"><img src="미소라멘.png" alt=""></td>
+                <td class="menuSummary">
+                  <h1 id="menu1_name">미소라멘</h1>
+                  <span id="menu1_price">8,000</span>
+                </td>
+                <td>
+                  남녀노소 좋아하는 담백한 라멘
+                </td>
+              </tr>
+              <tr class="menu2" onclick="chooseMenu(2)">
+                <td><img src="타코야끼.png" alt=""></td>
+                <td class="menuSummary">
+                  <h1 id="menu2_name">타꼬야끼</h1>
+                  <span id="menu2_price">7,000</span>
+                </td>
+                <td>
+                  오동통한 문어가 들어간 타코야끼
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+
+          <div class="grid-Basket">
+            <table cellspacing="0" border="1" class="Basket" style="width:100%;">
+      				<caption>장바구니</caption>
+      				<colgroup>
+      					<col width="92" /> 										<!--x 버튼-->
+      					<col width="370" /> 									<!--메뉴-->
+      					<col width="150" />		                <!-- +, 수량, -표시 -->
+      					<col width="275" /> 									<!--가격-->
+                <col width="100%" />
+      				</colgroup>
+      				<thead>
+      					<tr>
+      						<th scope="col"></th>
+                  <!-- <input type="checkbox" name="" id='chk_all' value="" onclick="CtlExecutor.doCheckAll();"/><label for="chk_all">선택</label> -->
+      						<th scope="col">메뉴명</th>
+      						<th scope="col">수량</th>
+      						<th scope="col">가격</th>
+                  <th scope="col">주문번호<span id="orderNum"></span></th>
+      			</tr>
+      		</thead>
+      	    </table>
+
+        <div class="grid-BasketList">
+          <div class="BasketMenuList">
+        	<table cellspacing="0" border="1" summary="장바구니메뉴목록" class="Basket" style="border-top:0px;">
+        		<colgroup>
+        			<col width="50" /> 										<!--x 버튼-->
+        			<col width="200" /> 									<!--메뉴-->
+        			<col width="80" />		               <!-- +, 수량, -표시 -->
+        			<col width="150" /> 									<!--가격-->
+            </colgroup>
+        		<tbody id="viewChosenMenu">
+        			<tr>
+        				<td class="frm"><span onclick="canclethisMenu(this)">
+                  <i class="fas fa-times"></i></span></td>
+        				<td class="name">사케동</td>
+        				<td class="amount">
+                  <span onclick="amountPlus(1)"><i class="far fa-caret-square-up"></i></span>
+                  <input type="text" size="5" value="1" id="amountBox1">
+                  <span onclick="amountMinus(1)"><i class="far fa-caret-square-down"></i></td></span>
+        				<td class="price">9000</td>
+        			</tr>
+              <tr>
+                <td class="frm">
+                  <span onclick="canclethisMenu(this)">
+                  <i class="fas fa-times"></i>
+                  </span>
+                </td>
+        				<td class="name">라멘</td>
+                <td class="amount">
+                <span onclick="amountPlus(2)"><i class="far fa-caret-square-up"></i></span>
+                <input type="text" size="5" value="1" id="amountBox2">
+                <span onclick="amountMinus(2)"><i class="far fa-caret-square-down"></i></span></td>
+        				<td class="price">8000</td>
+        			</tr>
+        	<!--		<tr>
+                <td class="frm"><span onclick="canclethisMenu(this)">
+                  <i class="fas fa-times"></i></span></td>
+        				<td class="name">치즈돈카츠</td>
+        				<td class="amount">수량</td>
+        				<td class="price">12000</td>
+        			</tr>
+        			<tr>
+                <td class="frm"><span onclick="canclethisMenu(this)">
+                  <i class="fas fa-times"></i></span></td>
+        				<td class="name">오코노미야끼</td>
+        				<td class="amount">수량</td>
+        				<td class="price">11000000</td>
+        			</tr>
+              <tr>
+                <td class="frm"><span onclick="canclethisMenu(this)">
+                  <i class="fas fa-times"></i></span></td>
+                <td class="name">사케동</td>
+                <td class="amount">수량</td>
+                <td class="price">9000</td>
+              </tr>
+              <tr>
+                <td class="frm"><span onclick="canclethisMenu(this)">
+                  <i class="fas fa-times"></i></span></td>
+                <td class="name">라멘</td>
+                <td class="amount">수량</td>
+                <td class="price">8000</td>
+              </tr>
+              <tr>
+                <td class="frm"><span onclick="canclethisMenu(this)">
+                  <i class="fas fa-times"></i></span></td>
+                <td class="name">사케동</td>
+                <td class="amount">수량</td>
+                <td class="price">9000</td>
+              </tr>
+              <tr>
+                <td class="frm"><span onclick="canclethisMenu(this)">
+                  <i class="fas fa-times"></i></span></td>
+                <td class="name">라멘</td>
+                <td class="amount">수량</td>
+                <td class="price">8000</td>
+              </tr> -->
+        		</tbody>
+        	</table>
+
+        </div>
+
+        <!-- <div class="inBasket_rightPart">
+            <table>
+              <tr>
+                <td>총액</td>
+              </tr>
+              <tr>
+                <td id="totalPrice"></td>
+              </tr>
+              <tr>
+             <td><button id="basketpay_btn" type="button" name="payButton" onclick="location.href='PaymentPage.html'">결제</button></td>
+              </tr>
+            </table>
+        </div> -->
+          <div  class="inBasket_rightPart">
+            <div class="BasketTotalPrice">
+              <h2>총액</h2>
+              <input type=text id="totalPrice" name="totalPrice" size=6 readonly value="0">
+              <!-- <h1 id="totalPrice" >35,000</h1> -->
+            </div>
+            <div class="BasketPay">
+              <button id="basketpay_btn" type="button" name="payButton" onclick="location.href='PaymentPage.html'">결제</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="grid-right">
+      </div>
+
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,74 @@
+body{
+  font-weight: bold;
+}
+pre{
+  text-align: right;
+  font-weight: bold;
+}
+.instruction{
+  padding: 100px;
+  font-size: 25px;
+  text-align: center;
+}
+.instructionBox{
+  border: 7px solid #2F4550;
+  width: 800px;
+  margin: 0px 100px;
+  position: relative;
+  left: 220px;
+  right: 250px;
+
+}
+
+.payWord{
+    font-size: 60px;
+    margin: 20px 20px;
+    border: none;
+}
+.orderNum{
+  font-size: 25px;
+  font-weight: bold;
+}
+.totalPrice{
+  font-size: 35px;
+}
+.grid-container{
+  border: 15px solid #2F4550;
+  border-radius: 10px;
+  margin: 20px;
+  height: 650px;
+
+}
+input{
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 3px solid #2F4550;
+  width: 500px;
+  text-align: center;
+  height: 25px;
+  font-size: 20px;
+}
+form{
+  position: relative;
+  bottom: 40px;
+  left: 150px;
+}
+button{
+  position: relative;
+  top: 30px;
+  left: 170px;
+  right: 400px;
+  font-size: 15px;
+  font-weight: bold;
+  color: white;
+  background-color:#586F7C;
+  line-height: 50px;
+  width: 150px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+button:hover{
+  cursor: pointer;
+  background-color: #2F4550;
+}

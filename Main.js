@@ -13,55 +13,97 @@
 //     }
 // }
 // 모달
-var regist_Modal = document.getElementById('Regist_Modal');
-var edit_Modal = document.getElementById('Edit_Modal');
-var delete_Modal = document.getElementById('Delete_Modal');
 
-// 모달 여는 버튼
-var regist_Btn = document.getElementById("Regist_Btn");
-var edit_Btn = document.getElementById("Edit_Btn");
-var delete_Btn = document.getElementById("Delete_Btn");
+window.onload = function () {
+  var registModal = document.getElementById('Regist_Modal');
+  var editModal = document.getElementById('Edit_Modal');
+  var deleteModal = document.getElementById('Delete_Modal');
 
-// 모달 닫힘 버튼 감싸는 태그 span
-var span_0 = document.getElementsByClassName("close")[0];
-var span_1 = document.getElementsByClassName("close")[1];
-var span_2 = document.getElementsByClassName("close")[2];
 
-// 사용자가 클릭했을 때 모달 뜨게 함
-regist_Btn.onclick = function() {
-    regist_Modal.style.display = "block";
-}
-edit_Btn.onclick = function() {
-    edit_Modal.style.display = "block";
-}
-delete_Btn.onclick = function() {
-    delete_Modal.style.display = "block";
+
+  var registBtn = document.getElementById('Regist_Btn');
+  var editBtn = document.getElementById("Edit_Btn");
+  var deleteBtn = document.getElementById("Delete_Btn");
+
+
+
+  var span0 = document.getElementsByClassName("close")[0];
+  var span1 = document.getElementsByClassName("close")[1];
+  var span2 = document.getElementsByClassName("close")[2];
+
+
+
+  // 사용자가 버튼 클릭하면 모달 열어주기
+  registBtn.addEventListener('click', function () {
+     registModal.style.display = "block";
+  })
+
+  editBtn.onclick = function() {
+      editModal.style.display = "block";
+  }
+  deleteBtn.onclick = function() {
+      deleteModal.style.display = "block";
+  }
+
+
+
+
+  // x버튼 누르면 모달 종료
+  span0.onclick = function() {
+      registModal.style.display = "none";
+  }
+  span1.onclick = function() {
+      editModal.style.display = "none";
+  }
+  span2.onclick = function() {
+      deleteModal.style.display = "none";
+  }
+
+
+
+
+  // 모달 바깥 부분 누르면 모달 닫힘
+  window.onclick = function(event) {
+      if (event.target == registModal) {
+          registModal.style.display = "none";
+      }
+  }
+  window.onclick = function(event) {
+      if (event.target == editModal) {
+          editModal.style.display = "none";
+      }
+  }
+  window.onclick = function(event) {
+      if (event.target == deleteModal) {
+          deleteModal.style.display = "none";
+      }
+  }
 }
 
-// 사용자가 span인 (x) 클릭 시, 모달 닫힘
-span_0.onclick = function() {
-    regist_Modal.style.display = "none";
-}
-span_1.onclick = function() {
-    edit_Modal.style.display = "none";
-}
-span_2.onclick = function() {
-    delete_Modal.style.display = "none";
-}
 
-// 모달 바깥 클릭하면 모달 종료
-window.onclick = function(event) {
-    if (event.target == regist_Modal) {
-        regist_Modal.style.display = "none";
-    }
-}
-window.onclick = function(event) {
-    if (event.target == edit_Modal) {
-        edit_Modal.style.display = "none";
-    }
-}
-window.onclick = function(event) {
-    if (event.target == delete_Modal) {
-        delete_Modal.style.display = "none";
-    }
-}
+
+var categoryClick = function(url){
+	if(url == '/'){
+		location.reload(true);
+		return;
+	}
+
+	$.ajax({
+		type: 'POST',
+		url: "category1.jsp",
+		async:false,
+		dataType: "text",
+		// contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+		success: function(data) {
+			$('#Container').html(data);
+
+			if(isMenuHide) menuOff();
+		},
+		error: function(request, status, error) {
+			alert('로드 실패 !');
+		}
+	});
+};
+
+
+출처: http://iruplace.tistory.com/80 [iruplace]

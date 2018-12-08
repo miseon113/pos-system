@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="PaymentHistory.css">
+    <script type="text/javascript" src="PaymentHistory.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <title>결제 내역 조회</title>
+  </head>
+  <body>
+    <div class="grid-container">
+        <span class="CancleWord">결제 취소</span>
+        <span class="orderNum">주문 번호</span>
+          <div class="grid-main">
+            <form action="ViewApprovalHistory.jsp" method="post">
+            <span class="ApprovalID">승인번호</span>
+            <input type="text" name="approvalNum">
+            <!-- <input class="btn" type="submit" name="view_approvalNum" value="승인번호 확인"> -->
+            <button type="submit" name="button"> 승인번호 조회</button>
+            </form>
+            <div class="tableHead">
+              <table>
+                <caption>결제 내역</caption>
+                <tr>
+                  <th>메뉴명</th>
+                  <th>가격</th>
+                  <th>수량</th>
+                </tr>
+              </table>
+            </div>
+          <div class="MenuList">
+              <table>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>사케동</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>사케동</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>사케동</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </table>
+          </div>
+            <button class="CancleModalBtn" type="submit" name="button"> 결제 취소</button>
+          </div>
+    </div>
+    <span onclick="location.href='Main.html'">
+      <i class="fas fa-home"></i>
+    </span>
+  </body>
+</html>
