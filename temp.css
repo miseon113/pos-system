@@ -22,7 +22,7 @@ padding:0px;
 }
 
 .Category_bar li a{
-background: #586F7C;
+/*background: #586F7C;*/
 color:white;
 display:block;
 font-weight:normal;
@@ -37,6 +37,12 @@ text-decoration:none;
 background: #2F4550;
 color:white;
 text-decoration:none;
+}
+
+.selected a {
+    background: #2F4550;
+    color:white;
+    text-decoration:none;
 }
 
 .in_Modal_menuBtn{

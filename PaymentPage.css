@@ -13,7 +13,7 @@ pre{
 .instructionBox{
   border: 7px solid #2F4550;
   width: 800px;
-  margin: 0px 100px;
+  margin: 5em 100px;
   position: relative;
   left: 220px;
   right: 250px;
@@ -29,8 +29,16 @@ pre{
   font-size: 25px;
   font-weight: bold;
 }
-.totalPrice{
+#totalPrice{
   font-size: 35px;
+  position: relative;
+  left: 20px;
+
+}
+.totalPrice-div{
+  font-size: 35px;
+  float: right;
+  margin-right: 1.2em;
 }
 .grid-container{
   border: 15px solid #2F4550;

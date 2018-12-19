@@ -5,12 +5,13 @@
     <title>Payment</title>
     <link rel="stylesheet" href="PaymentPage.css">
     <script type="text/javascript" src="PaymentPage.js"></script>
+
   </head>
   <body>
    <div class="grid-container">
      <div class="payWord">결제</div>
-       <pre><span class="orderNum">주문번호              1 </span></pre>
-       <span class="totalPrice"><pre>총 금액   35,000원</pre></span>
+       <pre><span class="orderNum" id="ordering_num">주문번호</span></pre>
+       <div class="totalPrice-div">총 금액<span id="totalPrice">35,000원</span></div>
        <div class="instructionBox">
          <div class="instruction">
            카드를 투입구에 긁히거나<br>
@@ -18,7 +19,7 @@
          </div>
          <form method="post">
            <input id="cardNum" type="text" name="cardNum" autocomplete="off"><br>
-           <button type="submit" name="button" onclick="showPayPopup()" >승인요청</button>
+           <button name="button" onclick="showPayPopup(); return false;" >승인요청</button>
          </form>
        </div>
   </div>

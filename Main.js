@@ -15,6 +15,18 @@
 // 모달
 
 window.onload = function () {
+    console.log('hihi')
+    var cas = document.getElementsByClassName('category_link');
+
+    for (var i = 0; i < cas.length; ++i) {
+        const index = i;
+        cas[i].addEventListener('click', function () {
+            localStorage.setItem('category_num', index+"");
+            console.log('hi')
+            window.location.replace('temp.html')
+
+        })
+    }
   var registModal = document.getElementById('Regist_Modal');
   var editModal = document.getElementById('Edit_Modal');
   var deleteModal = document.getElementById('Delete_Modal');
@@ -78,32 +90,30 @@ window.onload = function () {
           deleteModal.style.display = "none";
       }
   }
+
+
+
 }
 
-
-
-var categoryClick = function(url){
-	if(url == '/'){
-		location.reload(true);
-		return;
-	}
-
-	$.ajax({
-		type: 'POST',
-		url: "category1.jsp",
-		async:false,
-		dataType: "text",
-		// contentType:"application/x-www-form-urlencoded; charset=UTF-8",
-		success: function(data) {
-			$('#Container').html(data);
-
-			if(isMenuHide) menuOff();
-		},
-		error: function(request, status, error) {
-			alert('로드 실패 !');
-		}
-	});
-};
-
-
-출처: http://iruplace.tistory.com/80 [iruplace]
+// 수정 전
+// var categoryClick = function(url){
+// 	if(url == '/'){
+// 		location.reload(true);
+// 		return;
+// 	}
+//
+// 	$.ajax({
+// 		type: 'POST',
+// 		url: "category.jsp",
+// 		async: true,
+// 		dataType: "text",
+// 		// contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+// 		success: function(data) {
+// 			$('.grid-main').jsp(data);
+//
+// 		},
+// 		error: function(request, status, error) {
+// 			alert('로드 실패 !');
+// 		}
+// 	});
+// };

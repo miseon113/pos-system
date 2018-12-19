@@ -1,9 +1,3 @@
-var orderNumber = 1;
-function orderNumber_plus(){
-  document.getElementById("orderNum").innerHTML= orderNumber;
-}
-
-
 
 // 장바구니에서 x표시 클릭 시 메뉴 삭제
 function canclethisMenu(obj) {
@@ -12,46 +6,93 @@ function canclethisMenu(obj) {
    tbody.removeChild(tr);
 }
 
-// 총액 계산
-// function payOrder() {
-//   var price=0;
-//   var number = 0;
-//   var sum=0;
-//   for(var i =1; i<5; i++){
-//      price = document.getElementById('menu'+i+'_price').textContent;
-//      number = document.getElementById('menu'+i+'_number').value;
-//      sum += price *number;
-//   }
-//
-//   window.alert("The total is "+sum+ "won 입니다.\n"+"Thank you.")
+function click_category(cateIndex) {
+  var categorys = document.getElementsByClassName("categoryBar")
+    localStorage.setItem('category_num', cateIndex+'');
+    for (var j = 0; j < categorys.length; ++j) {
+      categorys[j].className = "categoryBar";
+    }
+    categorys[cateIndex].className = "categoryBar selected"
+}
+// 메뉴리스트 화면에서 선택하는 카테 고리마다 해당 페이지 호출시키게 함
+// function showMenuList(){
+//   var xhttp = new XMLHttpRequest();
+//     xhttp.open("GET", "test.jsp");
+//     xhttp.onreadystatechange = function() {
+//       if (xhttp.readyState == 4 && xhttp.status == 200) {
+//         document.getElementById("Context").innerHTML = xhttp.responseText;
+//       }
+//     };
+//     xhttp.send();
 // }
 
-// 메뉴리스트 화면에서 선택하는 카테 고리마다 해당 페이지 호출시키게 함
-function showMenuList(){
-  var xhttp = new XMLHttpRequest();
-    xhttp.open("GET", "test.jsp");
-    xhttp.onreadystatechange = function() {
-      if (xhttp.readyState == 4 && xhttp.status == 200) {
-        document.getElementById("Context").innerHTML = xhttp.responseText;
-      }
-    };
-    xhttp.send();
-}
+// var categoryBarClick = function(url){
+//     if(url == '/'){
+//         location.reload(true);
+//         return;
+//     }
+//
+//     $.ajax({
+//         type: 'POST',
+//         url: "category.jsp",
+//         async: true,
+//         dataType: "text",
+//         // contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+//         success: function(data) {
+//             $('.grid-main').jsp(data);
+//
+//         },
+//         error: function(request, status, error) {
+//             alert('로드 실패 !');
+//         }
+//     });
+// };
+//
+// 메뉴리스트화면에서 카테고리바 클릭 시 해당하는 메뉴목록 서버에 요청
+$(document).ready(function(){
+    var categorys = document.getElementsByClassName("categoryBar")
+    for (var j = 0; j < categorys.length; ++j) {
+        categorys[j].className = "categoryBar";
+    }
+    let cateIndex = localStorage.getItem('category_num')
+    categorys[cateIndex].className = "categoryBar selected"
 
 
+    $('.categoryBar').on('click',function(){
+        var index = $('.categoryBar').index(this);
+        $.ajax({
+            type: 'POST',
+            url: "menuList.jsp",
+            dataType: "json",
+            data: {num: index},
+
+            success: function(data) {
+                console.log(data);
+            },
+            error: function() {
+                alert('로드 실패 !');
+            }
+        });
+    });
+});
+
+
+
+
+
+// 장바구니에 메뉴 추가될 때마다 사용될 td틀
 let menu_dict = {
-}
+  }
 
-function makeElement(type, attributes, event) {
+function makeElement(type, attributes) {
   var element = document.createElement(type);
   for (key in attributes) {
     element.setAttribute(key, attributes[key]);
   }
-  for (key in event) {
-    element.addEventListener(key, event[key]);
-  }
+
   return element;
 }
+
 
 // 선택한 메뉴 장바구니에 추가
 function chooseMenu(i) {
@@ -72,9 +113,13 @@ function chooseMenu(i) {
     //   'attribute': {},
     //   'event': {}
     // }
-    var iconSpanPart = makeElement('span',{},{
-      'click':canclethisMenu(this)
-    });
+    var iconSpanPart = makeElement('span',{});
+    iconSpanPart.addEventListener("click", function(){
+           canclethisMenu(this)
+         });
+      iconSpanPart.addEventListener("click", function(){
+          payOrder()
+      });
     var icon = makeElement('i',{
       'class':'fas fa-times'
     });
@@ -99,7 +144,7 @@ function chooseMenu(i) {
     var nameTd = makeElement('td',{
       'class':'name'
     });
-    var name = makeElementById("menu"+i+"_name").innerText;
+    var name = document.getElementById("menu"+i+"_name").innerText;
     nameTd.innerHTML = name;
     // var nameTd = document.createElement("td");
     // console.log('menu'+i+'_name')
@@ -107,32 +152,50 @@ function chooseMenu(i) {
     // nameTd.setAttribute("class", "name");
     // nameTd.innerHTML = name;
 
-    // 행 안에 메뉴 수량, 가격 넣는 열 생성
-    i = amount;
+    // 행 안에 메뉴 수량 열 생성
+
+    console.log(amount);
     var amountTd = makeElement('td',{
       'class' : 'amount'
     });
-    var plus_span = makeElement('span',{},{
-      'click' :amountPlus(i)
-    });
+      i = amount;
+    var plus_span = makeElement('span',{});
+    plus_span.addEventListener("click", function(){
+              amountPlus(i)
+         });
+      plus_span.addEventListener("click", function(){
+          payOrder()
+      });
     var plus_icon = makeElement('i',{
       'class':'far fa-caret-square-up'
     });
     var amountInputBox = makeElement('input',{
-      'class': 'amountBox',
+      'id': 'amountBox'+i,
       'value': "1",
       "size": "5",
       "type": "text"
     });
-    amount += 1;
-    var minus_span = makeElement('span',{},{
-      'click' : amountMinus(i)
+    var minus_span = makeElement('span',{});
+    minus_span.addEventListener("click", function(){
+          amountMinus(i)
     });
+      minus_span.addEventListener("click", function(){
+         payOrder()
+      });
+      amount += 1;
     var minus_icon = makeElement('i',{
       'class':'far fa-caret-square-down'
     });
+    plus_span.appendChild(plus_icon);
+    minus_span.appendChild(minus_icon);
+    amountTd.appendChild(plus_span);
+    amountTd.appendChild(amountInputBox);
+    amountTd.appendChild(minus_span);
+
+
+    // 행 안에 가격 열 생성
     var priceTd = makeElement('td',{
-      'class':'price'
+      'id':'price'
     });
     var price = document.getElementById("menu"+i+"_price").innerText;
     priceTd.innerHTML = price;
@@ -171,15 +234,19 @@ function chooseMenu(i) {
     // amountPlusSpan.appendChild(amountPlusIcon);
     // amountTd.appendChild(amountPlusSpan);
     // amountTd.appendChild(amountInputBox);
-    // amountTd.appendChild(inpu);
+    // amountTd.appendChild(input);
     // amountTd.appendChild(amountMinusSpan);
 
     // 선택한 메뉴에 대한 행 안에 위에서 만든 태그들 다 넣어줌
     menuRow.appendChild(iconTd);
-    iconTd.insertAdjacentElement("afterend",nameTd);
-    nameTd.insertAdjacentElement("afterend", amountTd);
-    amountTd.insertAdjacentElement("afterend",priceTd);
+    menuRow.appendChild(nameTd);
+    menuRow.appendChild(amountTd);
+    menuRow.appendChild(priceTd);
     document.getElementById('viewChosenMenu').appendChild(menuRow);
+    // iconTd.insertAdjacentElement("afterend",nameTd);
+    // nameTd.insertAdjacentElement("afterend", amountTd);
+    // amountTd.insertAdjacentElement("afterend",priceTd);
+    // document.getElementById('viewChosenMenu').appendChild(menuRow);
     // preTd.insertAdjacentElement("afterend",menuRow);
   }
   else{
@@ -190,10 +257,6 @@ function chooseMenu(i) {
 
 }
 
-
-
-
-// 총액 계산하는 함수
 var amount = 1;  // 수량
 var totalPrice_view = document.getElementById("totalPrice"); //  총액
 var sum =0;
@@ -204,8 +267,9 @@ var price = document.getElementsByClassName('price');
 function amountPlus(i){
   var amountBox = document.getElementById('amountBox'+i);
   // var amountBox = document.getElementsByClassName('amountBox');  // 수량박스
+  console.log('amountBox'+i);
   amount = amountBox.value++;
-  menu_dict[i] += 1
+  menu_dict[i] += 1;
   amountBox.innerHTML = amount;
 }
 // 수량 감소 함수
@@ -214,105 +278,28 @@ function amountMinus(i){
   // var amountBox = document.getElementsByClassName('amountBox');  // 수량박스
   if(amountBox.value>1){
     amount = amountBox.value--;
-    menu_dict[i] -= 1
+    menu_dict[i] -= 1;
     amountBox.innerHTML = amount;
   }
 }
-// 총액 계산하는 함수
-function calcTotalPrice(){
-  for(var i =0; i<amountBox.length; i++){
-    var amountBox = document.getElementById('amountBox'+i);
-     sum+= price[i].textContent*amountBox[i].value;
-     console.log(price[i]);
-     console.log(price[i]);
-     sum += price *number;
-  }
-  totalPrice_view.innerHTML = sum;
+
+function payOrder(){
+    // var price =0;
+    // var number =0;
+    var sum = 0;
+    var viewChosenMenu = document.getElementById('viewChosenMenu');
+    var td_length = viewChosenMenu.childNodes.length;
+    // console.log(viewChosenMenu.childNodes[1].childNodes[2].childNodes[1].value);
+    for (var i = 1; i < td_length; i++) {
+        var number = viewChosenMenu.childNodes[i].childNodes[2].childNodes[1].value;
+        console.log(number);
+        var price = viewChosenMenu.childNodes[i].childNodes[3].textContent;
+        console.log(price);
+        sum += parseInt(number) * parseInt(price);
+    }
+    console.log(sum);
+    document.getElementById('totalPrice').value = sum.toString();
+    localStorage.setItem("price", sum.toString());
 }
-// function payOrder() {
-//   var price=0;
-//   var number = 0;
-//   var sum=0;
-//   price = document.getElementsByClassName('price');
-//   number = document.getElementsByClassName('number');
-//   for(var i =0; i<price.length; i++){
-//      sum += price[i].textContent*number[i].value;
-//      console.log(price[i]);
-//      console.log(price[i]);
-//      sum += price *number;
-//   }
-//
-//   document.getElementById("totalPrice").innerHTML = sum;
-// }
 
 
-
-//
-// function insertMenu() {
-//   var x = event.target.id;
-//   tablenumber = x.replace(/[^0-9]/g, "");
-//
-// 	// 메뉴 리스트 화면에 출력
-//   for (var i = 1; i < menuNameList.length; i++) {
-// 		// 테이블에 주문된 메뉴가 존재하는 경우
-//     if (document.getElementById(menuNameList[i] + tablenumber) != undefined) {
-// 	    document.getElementById("menu" + i + "_checkbox").checked = true;
-// 	    document.getElementById("menu" + i + "_number").removeAttribute("disabled");
-// 	    document.getElementById("menu" + i + "_number").value = document.getElementById(menuNameList[i] + tablenumber + "_number").innerHTML;
-//     }
-// 		else {
-//       document.getElementById("menu" + i + "_checkbox").checked = false;
-//       document.getElementById("menu" + i + "_number").value = "";
-//       document.getElementById("menu" + i + "_number").setAttribute("disabled", "true");
-//     }
-//   }
-// }
-//
-// // 해당 코드르 통하여 Pos.html에 있는 id=Menudispaly가 id=Menu로 변경되어 화면에서 사라짐
-// function exit() {
-//   var _Menudisplay = document.getElementById("Menudisplay");
-//   _Menudisplay.setAttribute("id", "Menu");
-// }
-//
-//
-// function orderMenu() {
-//
-//   var menuName = 0,
-// 	    price = 0,
-// 	    num = 0;
-//
-//   document.getElementById("MenuList" + tablenumber).innerHTML = "";
-//
-//   for (var i = 1; i < menuNameList.length; i++) {
-// 		// 체크 박스가 체크된 경우(주문이 된 경우)
-//     checkFlag = document.getElementById('menu' + i + '_checkbox').checked;
-//
-// 		// 주문이 된 경우
-// 		if (checkFlag) {
-//       menu = document.getElementById('menu' + i + '_checkbox').value;
-//       price = document.getElementById('menu' + i + '_price').textContent;
-//       num = document.getElementById('menu' + i + '_number').value;
-//
-// 			// 메뉴에 해당하는 행 생성
-// 			var menuRow = document.createElement("div");
-// 		  menuRow.setAttribute("class", "menuRow");
-// 		  document.getElementById('MenuList' + tablenumber).appendChild(menuRow);
-//
-// 			// 행안의 메뉴 이름 생성
-// 		  var menuInfo = document.createElement("div");
-// 		  menuInfo.setAttribute("class", "menu_name");
-// 		  menuInfo.setAttribute("id", menu + tablenumber);
-// 		  menuInfo.innerHTML = menu;
-// 		  menuRow.appendChild(menuInfo);
-//
-// 			// 행안의 메뉴 갯수 생성
-// 		  var menuNumber = document.createElement("div");
-// 		  menuNumber.setAttribute("class", "menu_number");
-// 		  menuNumber.setAttribute("id", menu + tablenumber + "_number");
-// 		  menuNumber.innerHTML = num;
-// 		  menuRow.appendChild(menuNumber);
-//     }
-//   }
-//
-//   exit();
-// }

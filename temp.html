@@ -4,14 +4,13 @@
     <meta charset="utf-8">
     <title> temp </title>
     <link rel="stylesheet" href="temp.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="temp.js"></script>
     <script type="text/javascript" src="Main.js"></script>
     <link rel="stylesheet" href="shoppingBasket.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <!-- <link rel="stylesheet" type="text/css" href="jquery.toast.min.css" />
-    <script type="text/javascript" src="jquery.js"></script>
-    <script type="text/javascript" src="jquery.toast.min.js"></script> -->
+
+
   </head>
 
 
@@ -55,21 +54,19 @@
             <div class="modal-content">
               <span class="close">&times;</span>
               <h1> 메뉴 현황 수정 </h1>
-                <form action="result.jsp" method="post"><!--여기 jsp 만들어줘야 함 !!!!!!!!!!!!-->
+                <form action="result.jsp" method="post">
                   <table class="in_menuModal_table">
                     <tr>
                       <th>메뉴</th>
                         <td>
-                          <select class="forInputWidth" name="Menu_list" >
-                              <option value="1" selected>메뉴명1</option>
-                              <option value="2">메뉴명2</option>
-                              <option value="3">메뉴명3</option>
-                              <option value="4">메뉴명4</option>
-                          </select>
+                            <input type="text" name="Category_List" value="">
+                        </td>
+                        <td>
+                            <input type="submit" name="find_Category" value="검색">
                         </td>
                     </tr>
                     <tr>
-                      <th>메뉴명</th><!--여기 위에 select에서 선택한 값이 그냥 입력되는 칸인데 어떻게 해야하지-->
+                      <th>메뉴명</th>
                     </tr>
                     <tr>
                       <th>메뉴가격</th>
@@ -126,11 +123,10 @@
       <div class="grid-main">
             <div class="Category_bar">
               <ul>
-                <li><a href="#">카테고리1</a></li>
-                <li><a href="#" id="current">카테고리2</a></li>
-                <li><a href="#">카테고리3</a></li>
-                <li><a href="#">카테고리4</a></li>
-                <li><a href="#">카테고리5</a></li>
+                <li onclick="click_category(0)" class="categoryBar selected"><a>카테고리1</a></li>
+                <li onclick="click_category(1)" class="categoryBar"><a>카테고리2</a></li>
+                <li onclick="click_category(2)" class="categoryBar"><a>카테고리3</a></li>
+                <li onclick="click_category(3)" class="categoryBar"><a>카테고리4</a></li>
               </ul>
             </div>
 
@@ -144,26 +140,36 @@
           			<col width="300px" />
                 <col width="auto" />
               </colgroup>
-              <tr class="menu1" onclick="chooseMenu(1)">
+              <tr class="menu1" onclick="chooseMenu(1); payOrder();">
                 <td id="menu1_img"><img src="미소라멘.png" alt=""></td>
                 <td class="menuSummary">
                   <h1 id="menu1_name">미소라멘</h1>
-                  <span id="menu1_price">8,000</span>
+                  <span id="menu1_price" value>6500</span>
                 </td>
                 <td>
-                  남녀노소 좋아하는 담백한 라멘
+                    된장을 베이스로 한 라멘
                 </td>
               </tr>
-              <tr class="menu2" onclick="chooseMenu(2)">
+              <tr class="menu2" onclick="chooseMenu(2); payOrder();">
                 <td><img src="타코야끼.png" alt=""></td>
                 <td class="menuSummary">
                   <h1 id="menu2_name">타꼬야끼</h1>
-                  <span id="menu2_price">7,000</span>
+                  <span id="menu2_price">4000</span>
                 </td>
                 <td>
-                  오동통한 문어가 들어간 타코야끼
+                    밀가루 반죽에 잘게 썬 문어와 파, 양배추 등을 넣어 동그랗게 구워내 가쓰오부시와 소스를 뿌려먹는 요리
                 </td>
               </tr>
+                <tr class="menu3" onclick="chooseMenu(3); payOrder();">
+                    <td><img src="돈코츠라멘.png" alt=""></td>
+                    <td class="menuSummary">
+                        <h1 id="menu3_name">돈코츠라멘</h1>
+                        <span id="menu3_price">7000</span>
+                    </td>
+                    <td>
+                        돼지 다리, 등뼈 등을 오랫동안 우려낸 육수로 만든 라멘
+                    </td>
+                </tr>
             </table>
           </div>
         </div>
@@ -186,7 +192,7 @@
       						<th scope="col">메뉴명</th>
       						<th scope="col">수량</th>
       						<th scope="col">가격</th>
-                  <th scope="col">주문번호<span id="orderNum"></span></th>
+                            <th scope="col"></th>
       			</tr>
       		</thead>
       	    </table>
@@ -200,72 +206,8 @@
         			<col width="80" />		               <!-- +, 수량, -표시 -->
         			<col width="150" /> 									<!--가격-->
             </colgroup>
-        		<tbody id="viewChosenMenu">
-        			<tr>
-        				<td class="frm"><span onclick="canclethisMenu(this)">
-                  <i class="fas fa-times"></i></span></td>
-        				<td class="name">사케동</td>
-        				<td class="amount">
-                  <span onclick="amountPlus(1)"><i class="far fa-caret-square-up"></i></span>
-                  <input type="text" size="5" value="1" id="amountBox1">
-                  <span onclick="amountMinus(1)"><i class="far fa-caret-square-down"></i></td></span>
-        				<td class="price">9000</td>
-        			</tr>
-              <tr>
-                <td class="frm">
-                  <span onclick="canclethisMenu(this)">
-                  <i class="fas fa-times"></i>
-                  </span>
-                </td>
-        				<td class="name">라멘</td>
-                <td class="amount">
-                <span onclick="amountPlus(2)"><i class="far fa-caret-square-up"></i></span>
-                <input type="text" size="5" value="1" id="amountBox2">
-                <span onclick="amountMinus(2)"><i class="far fa-caret-square-down"></i></span></td>
-        				<td class="price">8000</td>
-        			</tr>
-        	<!--		<tr>
-                <td class="frm"><span onclick="canclethisMenu(this)">
-                  <i class="fas fa-times"></i></span></td>
-        				<td class="name">치즈돈카츠</td>
-        				<td class="amount">수량</td>
-        				<td class="price">12000</td>
-        			</tr>
-        			<tr>
-                <td class="frm"><span onclick="canclethisMenu(this)">
-                  <i class="fas fa-times"></i></span></td>
-        				<td class="name">오코노미야끼</td>
-        				<td class="amount">수량</td>
-        				<td class="price">11000000</td>
-        			</tr>
-              <tr>
-                <td class="frm"><span onclick="canclethisMenu(this)">
-                  <i class="fas fa-times"></i></span></td>
-                <td class="name">사케동</td>
-                <td class="amount">수량</td>
-                <td class="price">9000</td>
-              </tr>
-              <tr>
-                <td class="frm"><span onclick="canclethisMenu(this)">
-                  <i class="fas fa-times"></i></span></td>
-                <td class="name">라멘</td>
-                <td class="amount">수량</td>
-                <td class="price">8000</td>
-              </tr>
-              <tr>
-                <td class="frm"><span onclick="canclethisMenu(this)">
-                  <i class="fas fa-times"></i></span></td>
-                <td class="name">사케동</td>
-                <td class="amount">수량</td>
-                <td class="price">9000</td>
-              </tr>
-              <tr>
-                <td class="frm"><span onclick="canclethisMenu(this)">
-                  <i class="fas fa-times"></i></span></td>
-                <td class="name">라멘</td>
-                <td class="amount">수량</td>
-                <td class="price">8000</td>
-              </tr> -->
+        		<tbody id="viewChosenMenu" onchange="payOrder()">
+
         		</tbody>
         	</table>
 
